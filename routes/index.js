@@ -1,6 +1,6 @@
 // routes/root.js
 export default async function (fastify) {
-    fastify.get('/', async (req, reply) => {
+    fastify.get('/api/todos', async (req, reply) => {
         try {
           const result = await fastify.pg.query('SELECT * FROM todo.todo ORDER BY id ASC');
           reply.send(result.rows); 
@@ -9,4 +9,8 @@ export default async function (fastify) {
           reply.status(500).send({ error: 'Server error' });
         }
       });
+
+// 
+
+
 }
