@@ -1,6 +1,7 @@
 // Import the framework and instantiate it
 import Fastify from 'fastify'
 import cors from '@fastify/cors'
+import routes from './routes/index.js'
 
 
 const fastify = Fastify({
@@ -13,9 +14,8 @@ await fastify.register(cors, {
 })
 
 // Declare a route
-fastify.get('/', async function handler (request, reply) {
-  return { hello: 'world' }
-})
+await fastify.register(routes) 
+
 
 // Run the server!
 try {
