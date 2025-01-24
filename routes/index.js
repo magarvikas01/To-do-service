@@ -19,7 +19,7 @@ export default async function (fastify) {
             return reply.status(400).send({ error: 'Todo cannot be empty' });
           }
     
-          const result = await fastify.pg.query('INSERT INTO todo.todo (name) VALUES ($1) RETURNING *', [todo]);
+          const result = await fastify.pg.query('INSERT INTO todo.todo (todo) VALUES ($1) RETURNING *', [todo]);
           reply.send(result.rows[0]);
         } catch (err) {
           fastify.log.error(err.message);
@@ -38,7 +38,7 @@ export default async function (fastify) {
           }
     
           const result = await fastify.pg.query(
-            'UPDATE todo.todo SET name = $1 WHERE id = $2 RETURNING *',
+            'UPDATE todo.todo SET todo = $1 WHERE id = $2 RETURNING *',
             [todo, id]
           );
     

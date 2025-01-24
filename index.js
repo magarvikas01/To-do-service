@@ -10,7 +10,7 @@ const fastify = Fastify({
 
 // database connection 
 await fastify.register( postgres , {
-  connectionString: `postgres://postgres:postgres@localhost:5432/local`})
+  connectionString: `postgres://postgres:postgres@0.0.0.0:5432/local`})
 
 await fastify.register(cors, {
   hook: 'preHandler',
