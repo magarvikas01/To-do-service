@@ -6,17 +6,27 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@fastify/cors": "^10.0.0",
+    "@fastify/jwt": "^9.0.3",
     "@fastify/postgres": "^6.0.2",
+    "@fastify/swagger": "^9.4.2",
+    "@fastify/swagger-ui": "^5.2.1",
     "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
     "fastify": "^5.2.1",
+    "fastify-keycloak-adapter": "^3.0.0",
+    "keycloak-connect": "^26.1.1",
     "nodemon": "^3.1.9",
     "pg": "^8.13.1",
     "react-icons": "^5.4.0"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.3",
+    "@types/node": "^22.13.1"
   }
 }
