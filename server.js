@@ -5,11 +5,47 @@ import jwt from '@fastify/jwt';
 import dotenv from 'dotenv';
 import todoRoutes from './routes/todoRoutes.js';
 import authenticate from './middleware/authenticate.js';
+import swagger from '@fastify/swagger';
+import swaggerUI from '@fastify/swagger-ui';
 
 dotenv.config();
 
 const fastify = Fastify({ logger: true });
 
+await fastify.register(swagger, {
+  swagger: {
+    info: {
+      title: 'Todo API',
+      description: 'API documentation for the Todo App',
+      version: '1.0.0',
+    },
+    host: 'localhost:5000',
+    schemes: ['http'],
+    consumes: ['application/json'],
+    produces: ['application/json'],
+    securityDefinitions: {
+      BearerAuth: {
+        type: 'apiKey',
+        name: 'Authorization',
+        in: 'header',
+        description: 'Enter JWT token as "Bearer <your-token>"',
+      },
+    },
+    security: [{ BearerAuth: [] }], 
+  },
+});
+
+fastify.register(swaggerUI, {
+  routePrefix: '/docs', 
+  uiConfig: {
+    docExpansion: 'full',
+    deepLinking: false,
+  },
+  staticCSP: true,
+  transformStaticCSP: (header) => header,
+  transformSpecification: (swaggerObject, request, reply) => swaggerObject,
+  transformSpecificationClone: true
+});
 
 // Database Connection
 fastify.register(postgres, { connectionString: process.env.DATABASE_URL });
