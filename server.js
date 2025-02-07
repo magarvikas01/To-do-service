@@ -90,4 +90,8 @@ const start = async () => {
   }
 };
 
-start();
+export default fastify;
+
+if (process.env.NODE_ENV !== 'test') {
+  start();
+}
