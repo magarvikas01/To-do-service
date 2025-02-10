@@ -16,7 +16,7 @@ export default (fastify) => {
 
       reply.send({
         todos,
-        totalCount,
+        totalCount:todos[0].total_count,
         currentPage: parseInt(page, 10),
         totalPages: Math.ceil(totalCount / limit),
       });

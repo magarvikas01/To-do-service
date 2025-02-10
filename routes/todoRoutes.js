@@ -4,7 +4,6 @@ export default async function (fastify) {
   const todoController = todoControllerFactory(fastify);
 
   fastify.get('/api/todos', { onRequest: [fastify.authenticate] }, todoController.getTodos);
-  
   fastify.post('/api/todos', {
     onRequest: [fastify.authenticate],
     schema: {
